@@ -1,0 +1,102 @@
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+
+<body>
+    <form>
+        <h1>Sign-Up Form</h1>
+        Username:
+        <input type="text" id="username">
+        <p id="usernameMessage"></p>
+        <br>
+        Password:
+        <input type="password" id="pass1">
+        <br>
+        Re-Password:
+        <input type="password" id="pass2">
+        <p id="passwordMessage"></p>
+        <br>
+        Birth Year:
+        <input type="text" id="year">
+        <p id="yearMessage"></p>
+        <br>
+        Postal Code:
+        <input type="text" id="postalcode">
+        <p id="postalcodeMessage"></p>
+        <br>
+        <br>
+        <button id="submit">Submit</button>
+    </form>
+
+    <script>
+        $(document).ready(function () {
+            function validate(event) {
+                event.preventDefault();
+                var userRegex = /^[a-zA-Z][\w]*$/;
+                var username = $('#username').val();
+
+                var passRegex = /^.{6,}$/;
+                var password1 = $('#pass1').val();
+                var password2 = $('#pass2').val();
+
+                var yearRegex = /^\d{4,}$/;
+                var year = $('#year').val();
+
+                var codeRegex = /[a-zA-Z]\d[a-zA-Z]\d[a-zA-Z]\d/;
+                var postalcode = $('#postalcode').val();
+
+                if (userRegex.test(username)) {
+                    $('#usernameMessage').text('Username accepted');
+                    $('#usernameMessage').css('color', 'green');
+                } else {
+                    $('#usernameMessage').text('Invalid username');
+                    $('#usernameMessage').css('color', 'red');
+                }
+
+                if (passRegex.test(password1)) {
+                    if (passRegex.test(password2)) {
+                        if (password1 == password2) {
+                            $('#passwordMessage').text('Password accepted');
+                            $('#passwordMessage').css('color', 'green');
+                        }
+                        else {
+                            $('#passwordMessage').text('Passwords do not match');
+                            $('#passwordMessage').css('color', 'red');
+                        }
+                    }
+                    else {
+                        $('#passwordMessage').text('Invalid Password');
+                        $('#passwordMessage').css('color', 'red');
+                    }
+                } else {
+                    $('#passwordMessage').text('Invalid Password');
+                    $('#passwordMessage').css('color', 'red');
+                }
+
+                if (yearRegex.test(year)) {
+                    $('#yearMessage').text('Valid year');
+                    $('#yearMessage').css('color', 'green');
+                }
+                else {
+                    $('#yearMessage').text('Invalid year');
+                    $('#yearMessage').css('color', 'red');
+                }
+
+                if (codeRegex.test(postalcode)) {
+                    $('#postalcodeMessage').text('Valid postal code');
+                    $('#postalcodeMessage').css('color', 'green');
+                }
+                else {
+                    $('#postalcodeMessage').text('Invalid postal code');
+                    $('#postalcodeMessage').css('color', 'red');
+                }
+            }
+
+            $('#submit').on('click', validate);
+        })
+    </script>
+</body>
+
+</html>
