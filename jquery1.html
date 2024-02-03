@@ -1,0 +1,29 @@
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+
+<body>
+    <input id="itemField"></input>
+    <p>
+    <ul>
+        <span id="list"></span>
+    </ul>
+    <script>
+        function keyPressHandler(e) {
+            if (e.keyCode == 13) {
+                $('#list').append('<li>' + $('#itemField').val() + '</li>');
+                $('#itemField').val('');
+            }
+        }
+        $('#itemField').keyup(keyPressHandler);
+
+
+        $('#list').on('click', 'li', function () {
+            $(this).css('text-decoration', 'line-through');
+        });
+    </script>
+</body>
+
+</html>
